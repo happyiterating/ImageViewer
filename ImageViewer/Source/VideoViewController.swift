@@ -24,6 +24,8 @@ class VideoViewController: ItemBaseController<VideoView> {
     let fullHDScreenSizePortrait = CGSize(width: 1080, height: 1920)
     let embeddedPlayButton = UIButton.circlePlayButton(70)
     
+    fileprivate var playerLooper: NSObject?
+    
     private var autoPlayStarted: Bool = false
     private var autoPlayEnabled: Bool = false
 
@@ -31,7 +33,15 @@ class VideoViewController: ItemBaseController<VideoView> {
 
         self.videoURL = videoURL
         self.scrubber = scrubber
-        self.player = AVPlayer(url: self.videoURL)
+        
+        if #available(iOS 10.0, *) {
+            let item = AVPlayerItem(url: self.videoURL)
+            let queue = AVQueuePlayer(playerItem: item)
+            playerLooper = AVPlayerLooper(player: queue, templateItem: item)
+            self.player = queue
+        } else {
+            self.player = AVPlayer(url: self.videoURL)
+        }
         
         ///Only those options relevant to the paging VideoViewController are explicitly handled here, the rest is handled by ItemViewControllers
         for item in configuration {
