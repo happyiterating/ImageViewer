@@ -9,12 +9,12 @@
 import UIKit
 import AVFoundation
 
-class VideoView: UIView {
+open class VideoView: UIView {
 
-    let previewImageView = UIImageView()
-    let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
-    var image: UIImage? { didSet { previewImageView.image = image } }
-    var player: AVPlayer? {
+    open let previewImageView = UIImageView()
+    open let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+    open var image: UIImage? { didSet { previewImageView.image = image } }
+    open var player: AVPlayer? {
 
         willSet {
 
@@ -43,7 +43,7 @@ class VideoView: UIView {
     
     fileprivate var timer: Timer?
 
-    override class var layerClass : AnyClass {
+    open override class var layerClass : AnyClass {
         return AVPlayerLayer.self
     }
 
@@ -66,7 +66,7 @@ class VideoView: UIView {
         loading.startAnimating()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -77,7 +77,7 @@ class VideoView: UIView {
         player?.removeObserver(self, forKeyPath: "timeControlStatus")
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         guard let status = self.player?.status,
               let rate = self.player?.rate,
