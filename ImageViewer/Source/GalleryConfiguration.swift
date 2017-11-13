@@ -158,6 +158,9 @@ public enum GalleryConfigurationItem {
 
     ///Tint color of video controls
     case videoControlsColor(UIColor)
+    
+    ///Mute video
+    case videoMute(Bool)
 }
 
 public enum GalleryRotationMode {

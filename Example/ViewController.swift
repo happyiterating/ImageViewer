@@ -41,8 +41,11 @@ class ViewController: UIViewController {
             switch index {
 
             case 2:
+                
+                // "http://video.dailymail.co.uk/video/mol/test/2016/09/21/5739239377694275356/1024x576_MP4_5739239377694275356.mp4"
+                let videoURL = URL(string: "https://test.youxianxiaozu.zbdapi.com/BABC7BBC21B737B5826E745F34F80525")!
 
-                galleryItem = GalleryItem.video(fetchPreviewImageBlock: { $0(UIImage(named: "2")!) }, videoURL: URL (string: "http://video.dailymail.co.uk/video/mol/test/2016/09/21/5739239377694275356/1024x576_MP4_5739239377694275356.mp4")!)
+                galleryItem = GalleryItem.video(fetchPreviewImageBlock: { $0(UIImage(named: "2")!) }, videoURL: videoURL)
 
             case 4:
 
@@ -144,7 +147,8 @@ class ViewController: UIViewController {
             GalleryConfigurationItem.statusBarHidden(true),
             GalleryConfigurationItem.displacementKeepOriginalInPlace(false),
             GalleryConfigurationItem.displacementInsetMargin(50),
-            GalleryConfigurationItem.videoAutoPlay(true)
+            GalleryConfigurationItem.videoAutoPlay(true),
+            GalleryConfigurationItem.videoMute(true)
         ]
     }
 }

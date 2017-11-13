@@ -53,6 +53,7 @@ open class GalleryViewController: UIPageViewController, ItemControllerDelegate {
     fileprivate var rotationMode = GalleryRotationMode.always
     fileprivate let swipeToDismissFadeOutAccelerationFactor: CGFloat = 6
     fileprivate var decorationViewsFadeDuration = 0.15
+    fileprivate var videoMute = false
 
     /// COMPLETION BLOCKS
     /// If set, the block is executed right after the initial launch animations finish.
@@ -105,6 +106,8 @@ open class GalleryViewController: UIPageViewController, ItemControllerDelegate {
             case .colorDismissDuration(let duration):           overlayView.colorDismissDuration = duration
             case .colorDismissDelay(let delay):                 overlayView.colorDismissDelay = delay
             case .continuePlayVideoOnEnd(let enabled):          continueNextVideoOnFinish = enabled
+            case .videoMute(let isMute):
+                videoMute = isMute
             case .seeAllCloseLayout(let layout):                seeAllCloseLayout = layout
             case .videoControlsColor(let color):                scrubber.tintColor = color
             case .closeButtonMode(let buttonMode):
@@ -613,6 +616,8 @@ open class GalleryViewController: UIPageViewController, ItemControllerDelegate {
         if let videoController = controller as? VideoViewController {
 
             scrubber.player = videoController.player
+            
+            videoController.player.isMuted = videoMute
         }
     }
 
